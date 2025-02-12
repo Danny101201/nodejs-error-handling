@@ -1,13 +1,17 @@
-function httpSignUp() {
-  throw new Error();
+import { NextFunction, Request, Response } from "express";
+import { DataBaseError } from "../errors/DataBaseError";
+import { AuthorizationError } from "../errors/AuthorizationError";
+import { BadRequestError } from "../errors/BadRequestError";
+async function httpSignUp(req: Request, res: Response, next: NextFunction) {
+  next(new DataBaseError());
 }
 
-function httpSignIn() {
-  throw new Error('Bad request');
+async function httpSignIn(req: Request, res: Response, next: NextFunction) {
+  next(new AuthorizationError());
 }
 
-function httpSignOut() {
-  throw new Error('Another bad request');
+async function httpSignOut(req: Request, res: Response, next: NextFunction) {
+  next(new BadRequestError('sign out error'));
 }
 
 export { httpSignUp, httpSignIn, httpSignOut };
